@@ -8,18 +8,28 @@ import core.time;
 import core.thread.osthread;
 import std.process: execute;
 
-void main()
+int main(string[] args)
 {
-  
+  string user;
+  if (args.length > 1)
+     user = args[1];
+  else
+     user = "CodeLongAndPros";
   auto stty = execute(["stty", "size"]);
   const int width = to!int(split(chomp(stty.output), " ")[1]);
   void print(string str) {
     writeln(center(str, width));
   }
   const string route = "https://profileapi.codelongandpros.repl.co/info";
-
-  auto data = get(route ~ "?user=" ~ "mat1");
-  auto json = parseJSON(to!string(data));
+  char[] data;
+  JSONValue json;
+  data = get(route ~ "?user=" ~ user);
+  if (data == "")
+    {
+      writeln(format("Sorry, no user @%s", user));
+      return 1; 
+    }
+  json = parseJSON(to!string(data));
 
   string name = json["name"].str;
   string bio =  json["bio"].str;
@@ -67,4 +77,5 @@ void main()
   }
 
   disp(profile);
+  return 0;
 }
