@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/rprofile
+rprofile.so
+rprofile.dylib
+rprofile.dll
+rprofile.a
+rprofile.lib
+rprofile-test-*
+*.exe
+*.o
+*.obj
+*.lst

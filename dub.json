@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"scott"
+	],
+	"copyright": "Copyright © 2020, scott",
+	"description": "Repl.it profile api",
+	"license": "BSD",
+	"name": "rprofile"
+}
