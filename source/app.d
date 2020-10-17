@@ -15,10 +15,13 @@ int main(string[] args)
      user = args[1];
   else
      user = "CodeLongAndPros";
+
+  writeln("Loading profile data. (Sorry it's so slow :()");
   auto stty = execute(["stty", "size"]);
   const int width = to!int(split(chomp(stty.output), " ")[1]);
   void print(string str) {
-    writeln(center(str, width));
+    foreach (string l; splitLines(str))
+      writeln(center(l, width));
   }
   const string route = "https://profileapi.codelongandpros.repl.co/info";
   char[] data;
@@ -36,6 +39,7 @@ int main(string[] args)
   int cycles = cast(int) json["cycles"].integer;
   string profile = json["profile"].str;
   string username = json["username"].str;
+  string location = json["location"].str;
   auto repls = json["repls"].array;
   auto roles = json["roles"].array;
   
@@ -44,6 +48,8 @@ int main(string[] args)
   print(username);
   Thread.sleep( dur!("msecs")( 100 ) );
   print(bio);
+  Thread.sleep( dur!("msecs")( 100 ) );
+  print(format("%s hails from the land of %s", username, location != "" ? location: "/dev/null"));
   Thread.sleep( dur!("msecs")( 100 ) );
   print(format("%d cycles", cycles));
   Thread.sleep( dur!("msecs")( 100 ) );
